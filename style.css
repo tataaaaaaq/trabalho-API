@@ -1,0 +1,111 @@
+.info {
+    background-color: #d192ee;
+    border: 4px solid #310346;
+    border-width: 1px;
+    padding: 14px;
+    margin: 25px 0;
+    border-radius: 5px;
+    font-size: 24px;
+    line-height: 1.6;
+    color: #ffffff;
+    grid-area: info;
+}
+body{
+    background-color: #f6e3ff;
+}
+.instrucoes {
+    background-color: #d192ee;
+    border: 4px solid #310346;
+    border-width: 1px;
+    padding: 14px;
+    margin: 25px 0;
+    border-radius: 5px;
+    font-size: 24px;
+    line-height: 1.6;
+    color: #ffffff;
+    text-align: center;
+    grid-area: instrucoes;
+}
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+        "titulo titulo titulo"
+        "instrucoes instrucoes instrucoes"
+        "info info info"
+        "botoes botoes botoes";
+    font-size: 28px;
+    color: black;
+    padding: 80px;
+}
+.titulo{
+    grid-area: titulo;
+    text-align: center;
+    color:#400f4e;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+.botoes{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+        "feriados livros CNPJ";
+}
+
+
+.botao_feriado{
+    border: solid 1px #d192ee;
+    border-radius: 20px;
+    color: #bf7ddd;
+    background-color: #d192ee;
+    transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease;
+    width: 130px;
+    text-align: center;
+    grid-area: feriados;
+}
+.botao_feriado:hover {
+    background-color: #bf7ddd;
+    color: white;
+    transform: scale(1.2);
+}
+
+.botao_livros {
+    border: solid 1px #d192ee;
+    border-radius: 20px;
+    color: #bf7ddd;
+    background-color: #d192ee;
+    transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease;
+    width: 130px;
+    text-align: center;
+    grid-area: livros;
+}
+.botao_livros:hover {
+    background-color: #bf7ddd;
+    color: white;
+    transform: scale(1.2)
+}
+
+.botao_cnpj {
+    border: solid 1px #d192ee;
+    border-radius: 20px;
+    color: #bf7ddd;
+    background-color: #d192ee;
+    transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease;
+    width: 130px;
+    text-align: center;
+    grid-area: CNPJ;
+}
+.botao_cnpj:hover {
+    background-color: #bf7ddd;
+    color: white;
+    transform: scale(1.2)
+}
+footer {
+    background-color: #d192ee;
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    color: #eeeeee;
+}

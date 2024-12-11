@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>CNPJ</title>
+</head>
+
+<body>
+    <main>
+        <div class="info">
+            <p>Digite o CNPJ de uma empresa para descobrir seu CEP</p>
+            <p>Digitar apenas os numeros do CNPJ</p>
+            <p>EXEMPLO: 11111111111111 </p>
+        </div>
+    </main>
+    <label for="cnpj">CNPJ</label>
+    <input type="number" id="cnpj"> 14 digitos<br>
+    <input type="button" value="Enviar" id="enviar"><br>
+    <div id="mostra"></div>
+    <script>
+        function mostraDados(js) {
+            const painel = document.querySelector('#mostra');
+            let texto = "<h1>Dados solicitados</h1>";
+                texto = texto + "Nome: " + js.nome_fantasia + "<br>";
+                texto = texto + "CEP: " + js.cep + "<br>";
+                texto = texto + "Telefone: " + js.ddd_telefone_1 + "<br>";
+                painel.innerHTML = texto;
+        }
+        async function consulta() {
+            let cnpj = document.querySelector('#cnpj').value;
+            const url = 'https://brasilapi.com.br/api/cnpj/v1/' + cnpj;
+            try {
+                let resposta = await fetch(url);
+                let js = await resposta.json();
+                mostraDados(js);
+            } catch (err) {
+                const painel = document.querySelector('#mostra');
+                let texto = "<h1>Verifique se o CNPJ é válido e está no formato correto</h1>";
+                texto += "Mensagem: " + err;
+                painel.innerHTML = texto;
+            }
+        }
+        document.querySelector("#enviar").addEventListener('click', consulta);
+    </script>
+</body>
+
+</html>

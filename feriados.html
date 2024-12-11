@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Feriados</title>
+</head>
+
+<body>
+    <main>
+        <div class="info">
+            <p>Digite um ano para descobrir seus feriados</p>
+            <p>Digitar apenas o numero do ano</p>
+            <p>EXEMPLO: 2024 </p>
+        </div>
+    </main>
+    <label for="ano">Ano</label>
+    <input type="number" id="ano"> 4 digitos<br>
+    <input type="button" value="Enviar" id="enviar"><br>
+    <div id="mostra"></div>
+    <script>
+
+        function mostraDados(js) {
+            const painel = document.querySelector('#mostra');
+            let texto = "<h1>Dados solicitados</h1>";
+            js.forEach(feriado => {
+                texto = texto + "Nome:" + feriado.name + "<br>";
+                texto = texto + "Tipo:" + feriado.type + "<br>";
+                texto = texto + "Data:" + feriado.date + "<br>";
+                painel.innerHTML = texto;
+            });
+        }
+        async function consulta() {
+            let ano = document.querySelector('#ano').value;
+            const url = 'https://brasilapi.com.br/api/feriados/v1/' + ano;
+            try {
+                let resposta = await fetch(url);
+                let js = await resposta.json();
+                mostraDados(js);
+            } catch (err) {
+                const painel = document.querySelector('#mostra');
+                let texto = "<h1>Verifique se o ano é válido e está no formato correto</h1>";
+                texto += "Mensagem: " + err;
+                painel.innerHTML = texto;
+            }
+        }
+        document.querySelector("#enviar").addEventListener('click', consulta);
+    </script>
+</body>
+
+</html>

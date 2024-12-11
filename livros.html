@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Livros</title>
+</head>
+
+<body>
+    <main>
+        <div class="info">
+            <p>Digite o códgio ISBN para mostrar o preço do livro</p>
+            <p>Digitar apenas os numeros do ISBN</p>
+            <p>EXEMPLO: 1111111111111 </p>
+        </div>
+    </main>
+    <label for="livro">Código ISBN</label>
+    <input type="text" id="livro">13 digitos<br>
+    <input type="button" value="Enviar" id="enviar"><br>
+    <div id="mostra"></div>
+    <script>
+        function mostraDados(js) {
+            const painel = document.querySelector('#mostra');
+            let texto = "<h1>Dados solicitados</h1>";
+                texto = texto + "Nome: " + js.title + "<br>";
+                texto = texto + "Ano de publicação: " + js.year + "<br>";
+                texto = texto + "Preço: " + js.retail_price + "<br>";
+                painel.innerHTML = texto;
+        }
+        async function consulta() {
+            let isbn = document.querySelector('#livro').value;
+            const url = 'https://brasilapi.com.br/api/isbn/v1/' + isbn;
+            try {
+                let resposta = await fetch(url);
+                let js = await resposta.json();
+                mostraDados(js);
+            } catch (err) {
+                const painel = document.querySelector('#mostra');
+                let texto = "<h1>Verifique se o ISBN é válido e está no formato correto</h1>";
+                texto += "Mensagem: " + err;
+                painel.innerHTML = texto;
+            }
+        }
+        document.querySelector("#enviar").addEventListener('click', consulta);
+    </script>
+</body>
+
+</html>
